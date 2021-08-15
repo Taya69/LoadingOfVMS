@@ -1,0 +1,25 @@
+<mat-progress-bar mode="indeterminate" *ngIf='loading'></mat-progress-bar>
+<h2  class="heading">select any 4 positions to display the load of machines</h2>
+       <mat-nav-list>
+            <mat-list-item  *ngFor="let machine of machines" class="listItem"
+            matLine (click) = "navigate(machine.id!)">
+              <div class='container'>
+                <div class='container2'>
+                  <mat-checkbox
+                  (click)='$event.stopPropagation()'
+                  (change)='changeShowingLoad(machine)'               
+                  [checked]='machine.selected'
+                  [disabled]='getDisable(machine)'
+                  >
+                 </mat-checkbox>
+                 <div >{{ machine.name }}</div>
+                </div>
+                            
+               <div *ngIf='loads.length > 0 && machine.selected'>{{getLoad(machine.id!)}}</div> 
+                       
+              </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-nav-list>
+        
+        

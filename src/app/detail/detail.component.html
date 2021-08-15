@@ -1,0 +1,23 @@
+<button (click)="goBack()" mat-button color="primary">go back</button>
+
+  <mat-progress-bar mode="indeterminate" *ngIf='loading'></mat-progress-bar>
+  <div class="wrapper">
+    <mat-list *ngIf='!loading'>
+      <h2>{{machine.name}}</h2>
+      <mat-list-item><strong>Ram:</strong>&nbsp; {{machine.ram}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><strong>Cores:</strong>&nbsp;  {{machine.cores}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><strong>Frequency:</strong>&nbsp;  {{machine.frequency}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><strong>Used memory:</strong>&nbsp; {{load.usedMemory}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><strong>loading each VM core at the moment:</strong></mat-list-item>
+      <mat-card>
+        <p *ngFor='let core of load.coreLoads'>
+          - {{core}}</p>
+      </mat-card>
+    
+    </mat-list>
+   
+  </div>
