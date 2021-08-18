@@ -13,13 +13,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { DetailComponent } from './detail/detail.component';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ListOfMachinesComponent,
-    DetailComponent
+    DetailComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,

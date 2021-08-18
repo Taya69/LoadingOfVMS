@@ -2,24 +2,44 @@
 <h2  class="heading">select any 4 positions to display the load of machines</h2>
        <mat-nav-list>
             <mat-list-item  *ngFor="let machine of machines" class="listItem"
-            matLine (click) = "navigate(machine.id!)">
-              <div class='container'>
-                <div class='container2'>
-                  <mat-checkbox
-                  (click)='$event.stopPropagation()'
-                  (change)='changeShowingLoad(machine)'               
-                  [checked]='machine.selected'
-                  [disabled]='getDisable(machine)'
-                  >
-                 </mat-checkbox>
-                 <div >{{ machine.name }}</div>
-                </div>
-                            
-               <div *ngIf='loads.length > 0 && machine.selected'>{{getLoad(machine.id!)}}</div> 
-                       
-              </div>
-              <mat-divider></mat-divider>
-            </mat-list-item>
-          </mat-nav-list>
-        
+            (click) = "navigate(machine.id!)">
+              <div matLine class='container'>                  
+                  <div class="container">
+                      <mat-checkbox
+                      (click)='$event.stopPropagation()'
+                      (change)='changeShowingLoad(machine)'               
+                      [checked]='machine.selected'
+                      [disabled]='getDisable(machine)'
+                      >
+                    </mat-checkbox>
+                    <div class="name" >{{ machine.name }}</div> 
+                    <div *ngIf='loads.length > 0 && machine.selected'>
+                      <strong>Total machine load: </strong>{{getLoad(machine.id!).usedMemory}}
+                    </div>  
+                  </div> 
+                  <div *ngIf='loads.length > 0 && machine.selected'>
+                                 
+                   <app-progress-bar [maxValue]=machine.ram [currentValue]='getLoad(machine.id!).usedMemory'
+                   ></app-progress-bar>
+                  </div>                       
+              
+              </div>    
+              <div matLine>Loading of cores:</div>
+                <mat-nav-list matLine *ngIf='loads.length > 0 && machine.selected'>
+                  <div matLine *ngFor='let core of getLoad(machine.id!).coreLoads; let i = index'> 
+                    <div class="container">  
+                    <span>{{i+1}}</span>                 
+                    <app-progress-bar [maxValue]=1 [currentValue]='core' class='container2'></app-progress-bar> 
+                  </div>                   
+                  </div> 
+                </mat-nav-list>
+               
+                     
+           <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-nav-list>
+
+      
+
+         
         

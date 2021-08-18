@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, InjectionToken, OnInit, ViewChild } from '@angular/core';
+import { MatExpansionPanelDefaultOptions } from '@angular/material/expansion';
 import { MatListOption } from '@angular/material/list';
 import { Router } from '@angular/router';
 import { interval } from 'rxjs';
@@ -14,11 +15,11 @@ import { MachinesServiceService } from '../machines-service.service';
 export class ListOfMachinesComponent implements OnInit {
  
   constructor(private vmsService: MachinesServiceService, private router: Router) { }  
-
+  expanded: boolean = true
   machines: Machine[] = []
   loads: Load[] = []
   loading: boolean = true
-  
+  cores: number[] = []  
   ngOnInit(): void {
     interval(1000).subscribe(() => {
       this.vmsService.getMachines().subscribe(data => {this.machines = data;     
@@ -43,8 +44,8 @@ export class ListOfMachinesComponent implements OnInit {
       return true
     } else  return false
   }
-  getLoad(idOfMachine: number): number {    
-    return this.loads.find( el => el.vmId === idOfMachine)!.usedMemory
+  getLoad(idOfMachine: number): Load {    
+    return this.loads.find( el => el.vmId === idOfMachine)!
   }  
   changeShowingLoad (machine: Machine) {   
    const index = this.machines.indexOf(machine);   

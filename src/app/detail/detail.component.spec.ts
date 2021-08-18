@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-
+import { DemoMaterialModule } from '../material-module.module'
+import {RouterTestingModule} from '@angular/router/testing';
 import { DetailComponent } from './detail.component';
 
 describe('DetailComponent', () => {
@@ -13,8 +14,8 @@ describe('DetailComponent', () => {
   let httpTestingController: HttpTestingController;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DetailComponent, route ],
-      imports: [ HttpClientTestingModule ]
+      declarations: [ DetailComponent ],
+      imports: [ HttpClientTestingModule, DemoMaterialModule, RouterTestingModule ]
     })
     .compileComponents();
   });
